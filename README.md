@@ -12,7 +12,7 @@ To transform the json into the data the muffler expects, use:
     // read the file
     string json = File.ReadAllText(jsonFilePath);
     // deserialize the json into the obj dictionary
-    _gagData = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(json) ?? new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
+    MufflerData = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(json) ?? new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
 ```
 
 Below is an example of how to format the json. This format is futureproofed to support all languages included in the core files.
