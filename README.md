@@ -15,7 +15,10 @@ To transform the json into the data the muffler expects, use:
     MufflerData = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(json) ?? new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
 ```
 
-Below is an example of how to format the json. This format is futureproofed to support all languages included in the core files.
+Below is an example of how to format the JSON. 
+This format is futureproofed to support all languages included in the core files.
+The MUFFLE attribute defines the intensity of the muffling effect, and determines which muffled object should take precedence when multiple objects are applied to the same character.
+The SOUND attribute defines the sound that the phoneme should be muffled into for the suppressed sound.
 ```
 {
     "None": {
