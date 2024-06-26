@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 // i am open to work with people who are part of this region to help create a accurate phonetic translation for this, but until then it has no use.
 
-namespace GagSpeak.Garbler.Translator;
+namespace MufflerCore.LanguageToIpa;
 // Class to convert Cantonese text to International Phonetic Alphabet (IPA) notation
 public class IpaParserCantonese
 {

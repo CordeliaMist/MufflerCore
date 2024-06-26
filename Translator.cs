@@ -52,7 +52,7 @@ public class Translator
     /// <returns>The MuffledSpeech translation of the message.</returns>
     public string ConvertToMuffledSpeech(string inputMessage)
     {
-        if (ActiveMufflers.All(gag => gag.MuffleSourceItem == "None"))
+        if (ActiveMufflers.All(muffler => muffler.MuffleSourceItem == "None"))
         {
             return inputMessage;
         }
@@ -80,8 +80,8 @@ public class Translator
                     string leadingPunctuation = new string(word.TakeWhile(char.IsPunctuation).ToArray());
                     string trailingPunctuation = new string(word.Reverse().TakeWhile(char.IsPunctuation).Reverse().ToArray());
                     string wordWithoutPunctuation = word.Substring(leadingPunctuation.Length, word.Length - leadingPunctuation.Length - trailingPunctuation.Length);
-                    string gaggedSpeak = entry.Item2.Any() ? ConvertPhoneticsToMuffledSpeech(entry.Item2, isAllCaps, isFirstLetterCaps) : wordWithoutPunctuation;
-                    finalMessage.Append(leadingPunctuation + gaggedSpeak + trailingPunctuation + " ");
+                    string muffledSpeak = entry.Item2.Any() ? ConvertPhoneticsToMuffledSpeech(entry.Item2, isAllCaps, isFirstLetterCaps) : wordWithoutPunctuation;
+                    finalMessage.Append(leadingPunctuation + muffledSpeak + trailingPunctuation + " ");
                 }
                 else
                 {
@@ -111,9 +111,10 @@ public class Translator
             try
             {
                 int MufflerIndex = ActiveMufflers
-                    .Select((gag, index) => new { gag, index })
-                    .Where(item => item.gag.MuffleStrengthOfPhoneme.ContainsKey(phonetic) && !string.IsNullOrEmpty(item.gag.IpaSymbolSound[phonetic]))
-                    .OrderByDescending(item => item.gag.MuffleStrengthOfPhoneme[phonetic])
+                    .Select((mufflerObject, index) => new { mufflerObject, index })
+                    .Where(item => item.mufflerObject.MuffleStrengthOfPhoneme.ContainsKey(phonetic) 
+                        && !string.IsNullOrEmpty(item.mufflerObject.IpaSymbolSound[phonetic]))
+                    .OrderByDescending(item => item.mufflerObject.MuffleStrengthOfPhoneme[phonetic])
                     .FirstOrDefault()?.index ?? -1;
                 if (MufflerIndex != -1)
                 {

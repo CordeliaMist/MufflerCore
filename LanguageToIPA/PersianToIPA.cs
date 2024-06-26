@@ -3,27 +3,23 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
-using Dalamud.Plugin;
 using Newtonsoft.Json;
-using GagSpeak.Garbler.PhonemeData;
 
 // i am open to work with people who are part of this region to help create a accurate phonetic translation for this, but until then it has no use.
 
-namespace MufflerCore.LangToIPA;
+namespace MufflerCore.LanguageToIpa;
 // Class to convert Persian text to International Phonetic Alphabet (IPA) notation
 public class IpaParserPersian
 {
     private             string                      data_file;       // Path to the JSON file containing the conversion rules
     private             Dictionary<string, string>  obj;             // Dictionary to store the conversion rules in JSON
-    private readonly    GagSpeakConfig              _config;         // The GagSpeak configuration
-    private             DalamudPluginInterface      _pluginInterface; // used to get the plugin interface
 	private List<string> CombinationsEng = new List<string> { "ɒː", "e", "iː", "uː", "eː", "ej", "ɒːj", "aw", "t͡ʃ", "d͡ʒ", "ts" }; 
 
 		// List to store unique phonetic symbols
 	private HashSet<string> uniqueSymbols = new HashSet<string>();
 	public string uniqueSymbolsString = "";
 
-    public IpaParserPersian(GagSpeakConfig config, DalamudPluginInterface pluginInterface)
+    public IpaParserPersian()
     {
         _config = config;
         _pluginInterface = pluginInterface;

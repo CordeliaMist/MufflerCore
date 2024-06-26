@@ -19,11 +19,10 @@ public class MufflerService
         MuffleObjectsData = MuffleObjDataSource;
         ActiveMuffleObjects = new List<MuffleObject>();
 
-        // create our gag listings
-        CreateGags(languageCode);
+        CreateMufflerObjects(languageCode);
     }
 
-    private void CreateGags(string languageCode)
+    private void CreateMufflerObjects(string languageCode)
     {
         List<string> masterList;
         switch (languageCode)
@@ -38,21 +37,21 @@ public class MufflerService
             default: throw new Exception("Invalid language");
         }
 
-        foreach (var gagEntry in MuffleObjectsData)
+        foreach (var mufflerEntry in MuffleObjectsData)
         {
-            var gagName = gagEntry.Key;
+            var mufflerName = mufflerEntry.Key;
             var muffleStrOnPhoneme = new Dictionary<string, int>();
             var ipaSymbolSound = new Dictionary<string, string>();
-            foreach (var phonemeEntry in gagEntry.Value)
+            foreach (var phonemeEntry in mufflerEntry.Value)
             {
                 var phoneme = phonemeEntry.Key;
                 var properties = phonemeEntry.Value;
                 muffleStrOnPhoneme[phoneme] = int.Parse(properties["MUFFLE"]);
                 ipaSymbolSound[phoneme] = properties["SOUND"];
             }
-            var gag = new MuffleObject();
-            gag.AddInfo(gagName, muffleStrOnPhoneme, ipaSymbolSound);
-            ActiveMuffleObjects.Add(gag);
+            var muffler = new MuffleObject();
+            muffler.AddInfo(mufflerName, muffleStrOnPhoneme, ipaSymbolSound);
+            ActiveMuffleObjects.Add(muffler);
         }
     }
 }
